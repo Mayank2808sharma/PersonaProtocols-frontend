@@ -1,23 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import FileUploadComponent from './components/FileUpload';
+import ChatComponent from './components/Chat';
 
 function App() {
+  const [sessionId] = useState('unique-session-id'); // In a real app, generate a unique session ID for each user.
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Chat with GPT</h1>
+      <FileUploadComponent sessionId={sessionId} />
+      <ChatComponent sessionId={sessionId} />
     </div>
   );
 }
