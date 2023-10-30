@@ -28,9 +28,11 @@ export default function Nav() {
               </Button>
 
               <HStack>
+                <a href="https://github.com/Mayank2808sharma/PersonaProtocols-frontend" target="_blank">
                 <Button colorScheme="green" leftIcon={<FaGithub />}>
                   Github
                 </Button>
+                </a>
               </HStack>
             </Stack>
           </Flex>

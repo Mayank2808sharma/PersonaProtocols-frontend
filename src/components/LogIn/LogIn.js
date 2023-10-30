@@ -1,13 +1,19 @@
-// HomePage.js
-import React from 'react';
-import Navbar from "./../Navbar/Navbar";
+// LogIn.js
+import React, { useState } from 'react';
+import Navbar from "../Navbar/Navbar";
 import { BsArrowRight } from 'react-icons/bs';
 import { Heading, Input, Flex, Box, Button, useBreakpointValue } from '@chakra-ui/react';
+import axios from 'axios';
 
-const HomePage = () => {
+const LogIn = ({setSessionId}) => {
   const buttonSize = useBreakpointValue({ base: 'md', md: 'lg' });
   const fontSize = useBreakpointValue({ base: 'xl', md: '2xl' });
-
+  const [name,setName] = useState('');
+  const handleClickEvent=async(e)=>{
+    const {data} =  await axios.post("http://localhost:5000/start-session")
+    setSessionId(data.sessionId)
+    setName(" ");
+  }
   return (
     <>
       <Navbar />
@@ -31,12 +37,15 @@ const HomePage = () => {
             variant="flushed"
             size={buttonSize}
             mb={2}
+            onChange={(e)=>setName(e.target.value)}
+            value={name}
           />
           <Button
             rightIcon={<BsArrowRight />}
             colorScheme="green"
             size={buttonSize}
             fontSize={fontSize}
+            onClick={handleClickEvent}
           >
             Enter
           </Button>
@@ -46,4 +55,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default LogIn;
