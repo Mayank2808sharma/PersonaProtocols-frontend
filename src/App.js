@@ -21,7 +21,7 @@ function App() {
           />
           <Route
             path="/home"
-            element={loggedIn ? <Home /> : <Navigate to="/login" replace />}
+            element={loggedIn ? <Home sessionId={sessionId}/> : <Navigate to="/login" replace />}
           />
           <Route
             path="/login"
