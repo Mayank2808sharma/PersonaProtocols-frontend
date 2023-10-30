@@ -28,7 +28,7 @@ export default function Nav() {
               </Button>
 
               <HStack>
-                <a href="https://github.com/Mayank2808sharma/PersonaProtocols-frontend" target="_blank">
+                <a href="https://github.com/Mayank2808sharma/PersonaProtocols-frontend" target="_blank" rel="noopener noreferrer">
                 <Button colorScheme="green" leftIcon={<FaGithub />}>
                   Github
                 </Button>

@@ -1,18 +1,26 @@
 // LogIn.js
 import React, { useState } from 'react';
 import Navbar from "../Navbar/Navbar";
+import { useNavigate } from 'react-router-dom';
 import { BsArrowRight } from 'react-icons/bs';
 import { Heading, Input, Flex, Box, Button, useBreakpointValue } from '@chakra-ui/react';
 import axios from 'axios';
 
-const LogIn = ({setSessionId}) => {
+const LogIn = ({setSessionId,setLoggedIn}) => {
+  const navigate = useNavigate();
   const buttonSize = useBreakpointValue({ base: 'md', md: 'lg' });
   const fontSize = useBreakpointValue({ base: 'xl', md: '2xl' });
   const [name,setName] = useState('');
   const handleClickEvent=async(e)=>{
-    const {data} =  await axios.post("http://localhost:5000/start-session")
-    setSessionId(data.sessionId)
-    setName(" ");
+    try {
+      const { data } = await axios.post("http://localhost:5000/start-session");
+      setSessionId(data.sessionId);
+      setLoggedIn(true);
+      setName("");
+      navigate('/home'); // Redirect to home after successful login
+    } catch (error) {
+      console.error('Error starting session', error);
+    }
   }
   return (
     <>
