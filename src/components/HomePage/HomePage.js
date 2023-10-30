@@ -1,9 +1,13 @@
+// HomePage.js
 import React from 'react';
 import Navbar from "./../Navbar/Navbar";
-import { BsArrowRight } from "react-icons/bs";
-import { Heading, Input, Flex, Box, Button } from "@chakra-ui/react";
+import { BsArrowRight } from 'react-icons/bs';
+import { Heading, Input, Flex, Box, Button, useBreakpointValue } from '@chakra-ui/react';
 
 const HomePage = () => {
+  const buttonSize = useBreakpointValue({ base: 'md', md: 'lg' });
+  const fontSize = useBreakpointValue({ base: 'xl', md: '2xl' });
+
   return (
     <>
       <Navbar />
@@ -11,30 +15,28 @@ const HomePage = () => {
         direction="column"
         align="center"
         justify="center"
-        height="calc(100vh - 60px)" // Adjust 60px according to your Navbar's height
+        height="calc(100vh - 60px)"
         textAlign="center"
+        px={4}
       >
         <Box mb={20}>
-          <Heading size="4xl">
+          <Heading size={fontSize}>
             Welcome to Persona <span style={{ color: "#38a169" }}>Protocol</span>
           </Heading>
-          <Heading size="xl">A GPT trained on your dataset</Heading>
+          <Heading size="lg">A GPT trained on your dataset</Heading>
         </Box>
-        <Flex align="center">
+        <Flex direction="column" align="center" w="full" maxW="md">
           <Input
             placeholder="Enter your Name"
             variant="flushed"
-            size="lg"
-            width="md"
-            mr={2}
+            size={buttonSize}
+            mb={2}
           />
           <Button
             rightIcon={<BsArrowRight />}
             colorScheme="green"
-            size="lg"
-            fontSize="2xl"
-            px={4}
-            py={2}
+            size={buttonSize}
+            fontSize={fontSize}
           >
             Enter
           </Button>
