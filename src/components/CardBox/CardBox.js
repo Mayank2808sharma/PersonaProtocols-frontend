@@ -1,7 +1,6 @@
 import React from 'react';
-import messages from './../data.json';
 import { Box, Flex, Text, useColorMode } from '@chakra-ui/react';
-const CardBox = () => {
+const CardBox = ({messages}) => {
   const { colorMode } = useColorMode();
   
   const userBgColor = { light: 'green.100', dark: 'green.200' };
