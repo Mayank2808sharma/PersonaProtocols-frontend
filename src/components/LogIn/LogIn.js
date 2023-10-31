@@ -4,22 +4,51 @@ import Navbar from "../Navbar/Navbar";
 import { useNavigate } from 'react-router-dom';
 import { BsArrowRight } from 'react-icons/bs';
 import { Heading, Input, Flex, Box, Button, useBreakpointValue } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react'
 import axios from 'axios';
 
 const LogIn = ({setSessionId,setLoggedIn}) => {
+  const toast = useToast()
   const navigate = useNavigate();
   const buttonSize = useBreakpointValue({ base: 'md', md: 'lg' });
   const fontSize = useBreakpointValue({ base: 'xl', md: '2xl' });
   const [name,setName] = useState('');
   const handleClickEvent=async(e)=>{
+    const trimmedName = name.trim();
+    if (!trimmedName) {
+      toast({
+        title: 'Account Creation Failed',
+        description: "Enter Name to log in",
+        status: 'error',
+        duration: 2000,
+        position: 'top-right',
+        isClosable: true,
+      })
+      return;
+    }
     try {
       const { data } = await axios.post("http://localhost:5000/start-session");
       setSessionId(data.sessionId);
       setLoggedIn(true);
       setName("");
+      toast({
+        title: 'Session Created',
+        description: "Account created successfully",
+        status: 'success',
+        duration: 2000,
+        position: 'top-right',
+        isClosable: true,
+      })
       navigate('/home'); // Redirect to home after successful login
     } catch (error) {
-      console.error('Error starting session', error);
+      toast({
+        title: 'Session not created',
+        description: "Error starting session",
+        status: 'error',
+        duration: 2000,
+        position: 'top-right',
+        isClosable: true,
+      })
     }
   }
   return (
