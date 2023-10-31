@@ -20,7 +20,7 @@ const Home = ({ sessionId }) => {
         <CardBox />
       </Flex>
       <Box position="fixed" bottom="0" left="0" right="0" padding="4">
-        <ChatInput />
+        <ChatInput sessionId={sessionId} />
       </Box>
     </Flex>
   );

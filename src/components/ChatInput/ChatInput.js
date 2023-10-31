@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { Input, Button, Flex, Box, useColorModeValue, IconButton } from '@chakra-ui/react';
 import { AttachmentIcon } from '@chakra-ui/icons';
+import axios from 'axios';
 
-const ChatInput = ({ onSendMessage, onSendFile }) => {
+const ChatInput = ({ sessionId }) => {
   const [message, setMessage] = useState('');
   const [file, setFile] = useState(null);
   const fileInputRef = useRef(null);
@@ -16,14 +17,20 @@ const ChatInput = ({ onSendMessage, onSendFile }) => {
     setMessage("");
   };
 
-  const handleSendFile = () => {
-    console.log(file);
-    setFile(null);
-  };
-
-  const handleEnterKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      handleSendMessage();
+  const handleSendFile = async(e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('sessionId', sessionId);
+    try {
+      const resp = await axios.post("http://localhost:5000/upload",formData,{
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }
+        });
+      console.log(resp)
+    } catch (error) {
+      console.error('Error submitting form', error);
     }
   };
 
@@ -60,14 +67,13 @@ const ChatInput = ({ onSendMessage, onSendFile }) => {
             bg={inputBgColor}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            onKeyPress={handleEnterKeyPress}
             placeholder="Type your message..."
             borderRadius="md"
             flexGrow={1}
           />
           <Button
             colorScheme={buttonColorScheme}
-            onClick={handleSendMessage}
+            onClick={file===null?handleSendMessage:handleSendFile}
             ml={2}
             borderRadius="md"
           >
