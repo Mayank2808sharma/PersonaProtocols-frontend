@@ -1,5 +1,4 @@
-"use client";
-
+import { Link } from 'react-router-dom';
 import {
   Box,
   Flex,
@@ -19,7 +18,7 @@ export default function Nav() {
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <Heading size='lg'>Persona <span style={{color:"#38a169"}}>Protocol</span></Heading>
+          <Link to="/"><Heading size='lg'>Persona <span style={{color:"#38a169"}}>Protocol</span></Heading></Link>
 
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>

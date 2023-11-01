@@ -5,7 +5,7 @@ import ChatInput from "./../ChatInput/ChatInput"; // Import your ChatInput compo
 import { Box, Flex } from "@chakra-ui/react";
 import messages from './../data.json';
 const Home = ({ sessionId }) => {
-  const[entireMessages, setEntireMessages] = useState(messages);
+  const[entireMessages, setEntireMessages] = useState([]);
   console.log(sessionId);
   return (
     <Flex direction="column" minH="100vh">

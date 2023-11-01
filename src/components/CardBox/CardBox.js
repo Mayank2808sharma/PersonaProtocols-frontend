@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Text, useColorMode } from '@chakra-ui/react';
+import { Box, Flex, Text, useColorMode,Heading } from '@chakra-ui/react';
 const CardBox = ({messages}) => {
   const { colorMode } = useColorMode();
   
@@ -7,6 +7,25 @@ const CardBox = ({messages}) => {
   const botBgColor = { light: 'gray.100', dark: 'gray.200' };
   const userTextColor = { light: "green.800", dark: "green.900" };
   const botTextColor = { light: "gray.800", dark: "gray.900" };
+  if(messages.length==0){
+    return(
+      <Flex
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+      height="100%"
+    >
+      <Box
+        borderRadius="md"
+        px={5}
+        py={3}
+        maxWidth="100%"
+      >
+        <Heading fontSize="3xl">Submit file for personalized, document-based query responses.</Heading>
+      </Box>
+    </Flex>
+    )
+  }
   return (
     <Flex
       direction="column"
